@@ -16,7 +16,7 @@ export const Container = styled(Box)({
   marginTop:'20vh'
 });
 
-export const SignUpContainer = styled(Box)(({ signIn }: { signIn: boolean }) => ({
+export const SignUpContainer = styled(Box)(({ signin }: { signin: boolean }) => ({
   position: 'absolute',
   top: 0,
   height: '100%',
@@ -25,7 +25,7 @@ export const SignUpContainer = styled(Box)(({ signIn }: { signIn: boolean }) => 
   width: '50%',
   opacity: 0,
   zIndex: 1,
-  ...(signIn !== true && {
+  ...(signin !== true && {
     transform: 'translateX(68%)',
     opacity: 1,
     zIndex: 5,
@@ -33,7 +33,7 @@ export const SignUpContainer = styled(Box)(({ signIn }: { signIn: boolean }) => 
   }),
 }));
 
-export const SignInContainer = styled(Box)(({ signIn }: { signIn: boolean }) => ({
+export const SignInContainer = styled(Box)(({ signin }: { signin: boolean }) => ({
   position: 'absolute',
   top: 0,
   height: '100%',
@@ -41,7 +41,7 @@ export const SignInContainer = styled(Box)(({ signIn }: { signIn: boolean }) => 
   left: 0,
   width: '50%',
   zIndex: 2,
-  ...(signIn !== true && {
+  ...(signin !== true && {
     transform: 'translateX(68%)',
     width:'60%',
   }),
@@ -103,7 +103,7 @@ export const Anchor = styled('a')({
   margin: '15px 0',
 });
 
-export const OverlayContainer = styled('div')(({ signIn }: { signIn: boolean }) => ({
+export const OverlayContainer = styled('div')(({ signin }: { signin: boolean }) => ({
   position: 'absolute',
   top: 0,
   left: '50%',
@@ -112,14 +112,14 @@ export const OverlayContainer = styled('div')(({ signIn }: { signIn: boolean }) 
   overflow: 'hidden',
   transition: 'transform 0.6s ease-in-out',
   zIndex: 100,
-  ...(signIn !== true && {
+  ...(signin !== true && {
     transform: 'translateX(-100%)',
     left: '40%',
     width: '40%',
   }),
 }));
 
-export const Overlay = styled('div')(({ signIn }: { signIn: boolean }) => ({
+export const Overlay = styled('div')(({ signin }: { signin: boolean }) => ({
   background: 'linear-gradient(to right, #00228a9e, #41bcffc4)',
   color: '#ffffff',
   position: 'relative',
@@ -128,7 +128,7 @@ export const Overlay = styled('div')(({ signIn }: { signIn: boolean }) => ({
   width: '200%',
   transform: 'translateX(0)',
   transition: 'transform 0.6s ease-in-out',
-  ...(signIn !== true && {
+  ...(signin !== true && {
     transform: 'translateX(50%)',
   }),
 }));

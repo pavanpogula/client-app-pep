@@ -4,9 +4,12 @@ import { Box, FormControl, IconButton, Input, InputAdornment, InputLabel, Typogr
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { validate_email, validate_name, validate_password } from '../../utils/utils';
+import { encrpt_password, validate_email, validate_name, validate_password } from '../../utils/utils';
 import * as Components from './styles';
 import InputFormControl from './inputFormControl';
+import { useAppDispatch, useAppSelector } from '../../features/app/hooks';
+import { checkUserExists,  signupUser } from '../../features/user/userSlice';
+import { userExist } from '../../features/types/userTypes';
 
 interface ErrorsState {
   email: boolean;
@@ -19,7 +22,8 @@ interface ErrorsState {
 
 export const SignupForm = (props: { signin: boolean }) => {
 
-
+  const dispatch = useAppDispatch();
+  const userExistDB:userExist = useAppSelector(state=>state.user.userExist)
   //email state
   const [email, setEmail] = React.useState<string>('');
   const [confirmEmail, setConfirmEmail] = React.useState<string>('');
@@ -42,40 +46,11 @@ export const SignupForm = (props: { signin: boolean }) => {
 
   })
 
-  const onBlurHandler = (event: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    let isValid = false;
-    switch (name) {
-      case 'firstname':
-      case 'lastname':
-        isValid = validate_name(value);
-        break;
-      case 'email':
-        isValid = validate_email(value);
-        break;
-      case 'confirmEmail':
-        isValid = value === email;
-        break;
-      case 'password':
-        isValid = validate_password(value);
-        break;
-      case 'confirmPassword':
-        isValid = value === password
-        break;
-      default:
-        break;
-    }
-    setErrors({ ...errors, [name]: !isValid });
-  };
+
+ 
 
 
-  const onBlurPasswordHandler = () => {
-    const isValidPassword = validate_password(password);
-    setErrors({
-      ...errors,
-      password: !isValidPassword
-    })
-  }
+
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
@@ -112,15 +87,46 @@ export const SignupForm = (props: { signin: boolean }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if ((email !== '' && !errors.email) && (password !== '' && !errors.password)) {
-      console.log('login')
-    } else {
-      alert("cannot signin")
+ dispatch(checkUserExists({email}))
+    const err:ErrorsState ={...errors}
+
+    if(!validate_name(firstname))
+      err.firstname=true
+    if(!validate_name(lastname))
+      err.lastname=true
+    if(!validate_email(email))
+      err.email=true
+    if( !validate_email(confirmEmail)  || email!==confirmEmail )
+      err.confirmEmail=true
+    if(!validate_password(password))
+      err.password=true
+    if( !validate_password(confirmPassword)  || password!==confirmPassword )
+      err.confirmPassword=true
+      
+      const hasErrors = (err: ErrorsState): boolean => {
+        return Object.values(err).some(error => error === true);
+      };
+
+
+      if(hasErrors(err) ){
+        setErrors({...err})
+        alert('cannot login')
+      }else{
+       const hashedPassword = encrpt_password(password)
+          dispatch(signupUser({"password":hashedPassword,email,firstname,lastname}))
+      }
+      
     }
-  }
+
+
+
+
+
+    
+  
   return (
     <>
-      <Components.SignUpContainer signIn={props.signin}>
+      <Components.SignUpContainer signin={props.signin}>
         <Components.Form onSubmit={handleSubmit}>
           <Components.Title>Create Account</Components.Title>
           <Box>
@@ -132,7 +138,7 @@ export const SignupForm = (props: { signin: boolean }) => {
               isError={errors.firstname}
               label='First Name'
               name='firstname'
-              onBlurHandler={onBlurHandler}
+              
               value={firstname}
               key={1}
 
@@ -143,7 +149,7 @@ export const SignupForm = (props: { signin: boolean }) => {
               isError={errors.lastname}
               label='Last Name'
               name='lastname'
-              onBlurHandler={onBlurHandler}
+              
               value={lastname}
               key={2}
 
@@ -152,12 +158,12 @@ export const SignupForm = (props: { signin: boolean }) => {
           </Box>
           <Box>
             <InputFormControl
-              errorText='enter valid mail address'
+              errorText={userExistDB['message']==='409'?'mail address exits': 'enter valid mail address'}
               inputHandler={inputHandler}
               isError={errors.email}
               label='Email'
               name='email'
-              onBlurHandler={onBlurHandler}
+              
               value={email}
               key={2}
               endAdornment={<InputAdornment position="end">
@@ -174,7 +180,7 @@ export const SignupForm = (props: { signin: boolean }) => {
               value={confirmEmail}
               errorText="Emails do not match"
               isError={errors.confirmEmail}
-              onBlurHandler={onBlurHandler}
+              
               inputHandler={inputHandler}
               endAdornment={
                 <InputAdornment position="end">
@@ -190,7 +196,8 @@ export const SignupForm = (props: { signin: boolean }) => {
             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" color={errors.password ? 'error' : 'primary'}>
               <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
               <Input
-                onBlur={onBlurPasswordHandler}
+              key={1}
+             autoComplete='current-password'
                 name='password'
                 id="standard-adornment-password"
                 value={password}
@@ -215,7 +222,8 @@ export const SignupForm = (props: { signin: boolean }) => {
             <FormControl sx={{ m: 1, width: '25ch' }} variant="standard" color={errors.confirmPassword ? 'error' : 'primary'}>
               <InputLabel htmlFor="standard-adornment-confirm-password">Confirm Password</InputLabel>
               <Input
-                onBlur={onBlurHandler}
+              key={2}
+            autoComplete='current-password'
                 name='confirmPassword'
                 id="standard-adornment-confirm-password"
                 value={confirmPassword}
