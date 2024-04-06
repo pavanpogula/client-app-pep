@@ -1,27 +1,32 @@
 import React, { useState } from "react";
 import * as Components from './styles';
 import { SignupForm } from "./signupForm";
-import { SigninForm } from "./signinForm";
+import  SigninForm  from "./signinForm";
 import TypingText from "./TypingText";
 import { Box } from "@mui/material";
+import {  useAppSelector } from "../../features/app/hooks";
 
 function Pure() {
-    const [signIn, setSignIn] = useState<boolean>(true);
+    const [signin, setSignIn] = useState<boolean>(true);
 
     const handleToggle = (isSignIn: boolean) => {
         setSignIn(isSignIn);
     };
+    const {loading} = useAppSelector(state=>state.user.loggedStatus)
+    
+   
 
     return (
+        !loading?
         <Components.Container>
-              <SigninForm signin={signIn}/>
-<SignupForm signin={signIn}/>
+              <SigninForm signin={signin}/>
+<SignupForm signin={signin}/>
          
 
-            <Components.OverlayContainer signIn={signIn}>
-                <Components.Overlay signIn={signIn}>
+            <Components.OverlayContainer signin={signin}>
+                <Components.Overlay signin={signin}>
                     <Components.LeftOverlayPanel >
-                      { !signIn &&<><TypingText signin={!signIn}/>
+                      { !signin &&<><TypingText signin={!signin}/>
                     
                         <Box sx={{mt:10}}>
                         <Components.GhostButton onClick={() => handleToggle(true)}>
@@ -33,7 +38,7 @@ function Pure() {
                     </Components.LeftOverlayPanel>
 
                     <Components.RightOverlayPanel >
-                {  signIn&&<><TypingText signin={!signIn}/>
+                {  signin&&<><TypingText signin={!signin}/>
                      
                         <Box sx={{mt:10}}>
                         <Components.GhostButton onClick={() => handleToggle(false)}>
@@ -44,6 +49,7 @@ function Pure() {
                 </Components.Overlay>
             </Components.OverlayContainer>
         </Components.Container>
+        :<></>
     );
 }
 

@@ -4,7 +4,7 @@ import React from 'react'
 type inputFormControl = {
     isError: boolean;
     name: string;
-    onBlurHandler: (event: React.FocusEvent<HTMLInputElement>) => void;
+    onBlurHandler?: (event: React.FocusEvent<HTMLInputElement>) => void;
     inputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
     value: string;
     errorText: string;
@@ -25,7 +25,7 @@ const InputFormControl: React.FC<inputFormControl> = ({ isError, name, onBlurHan
                 {label}
             </InputLabel>
             <Input
-                onBlur={onBlurHandler}
+                autoComplete={name}
                 name={name}
                 id={`standard-adornment-lastname-${name}`}
                 type={'text'}

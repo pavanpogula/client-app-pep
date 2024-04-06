@@ -6,18 +6,29 @@ import { FormControl, IconButton, Input, InputAdornment, InputLabel, Typography 
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { validate_email, validate_password } from '../../utils/utils';
+import { encrpt_password, validate_email, validate_password } from '../../utils/utils';
 import InputFormControl from './inputFormControl';
+import { useAppDispatch } from '../../features/app/hooks';
+import { signinUser } from '../../features/user/userSlice';
 
 
-export const SigninForm = (props: { signin: boolean }) => {
+
+ const SigninForm = (props: { signin: boolean }) => {
+ 
+  const dispatch = useAppDispatch();
+
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('pavanpogula28@gmail.com');
+  const [password, setPassword] = React.useState<string>('Pastro##2897');
   const [errors, setErrors] = React.useState({ "email": false, "password": false })
+
+
+
+
   const onBlurEmailHandler = () => {
 
     const isValidEmail = validate_email(email)
+   
     setErrors({
       ...errors,
       email: !isValidEmail
@@ -55,10 +66,13 @@ export const SigninForm = (props: { signin: boolean }) => {
     event.preventDefault();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if ((email !== '' && !errors.email) && (password !== '' && !errors.password)) {
-      console.log('login')
+      const hashedPassword = encrpt_password(password);
+
+   dispatch(signinUser({ "email": email,
+      "password": hashedPassword}))
     } else {
       alert("cannot signin")
     }
@@ -68,7 +82,7 @@ export const SigninForm = (props: { signin: boolean }) => {
 
   return (
     <>
-      <Components.SignInContainer signIn={props.signin}>
+      <Components.SignInContainer signin={props.signin}>
         <Components.Form onSubmit={handleSubmit}>
           <Components.Title>Sign in</Components.Title>
           <InputFormControl
@@ -115,8 +129,12 @@ export const SigninForm = (props: { signin: boolean }) => {
           </FormControl>
           <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
           <Components.Button type='submit'  >Sign In</Components.Button>
+       
         </Components.Form>
       </Components.SignInContainer>
     </>
   )
 }
+
+
+export default SigninForm

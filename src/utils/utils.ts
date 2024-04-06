@@ -1,5 +1,7 @@
 
+const CryptoJS = require('crypto-js');
 
+const SECRET = process.env.REACT_APP_SECRET
 
 const validate_password = (password:string):boolean => {
     const hasMinimumLength = password.length >= 8;
@@ -30,5 +32,15 @@ const validate_name = (data:string):boolean =>{
     return regex.test(data);
 }
 
+const encrpt_password = (message:string) => {
+    var key = CryptoJS.enc.Utf8.parse(SECRET);
+    console.log(key)
+    let encrypted= CryptoJS.AES.encrypt(message, key, { mode: CryptoJS.mode.ECB }).toString();
+      console.log("mode ",encrypted)
 
-export {validate_password, validate_email, validate_name}
+   return encrypted;
+}
+
+
+
+export {validate_password, validate_email, validate_name,encrpt_password}
