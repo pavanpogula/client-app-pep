@@ -1,0 +1,7 @@
+version: '3.8'  # Specify the Docker Compose version
+
+services:
+  frontend-app:
+    image: pavanpogula/client-app-pep:latest  # Replace with your Docker Hub username and image name
+    ports:
+      - "3000:3000"  #

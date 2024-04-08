@@ -18,8 +18,8 @@ import { signinUser } from '../../features/user/userSlice';
   const dispatch = useAppDispatch();
 
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
-  const [email, setEmail] = React.useState<string>('pavanpogula28@gmail.com');
-  const [password, setPassword] = React.useState<string>('Pastro##2897');
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
   const [errors, setErrors] = React.useState({ "email": false, "password": false })
 
 
@@ -84,7 +84,7 @@ import { signinUser } from '../../features/user/userSlice';
     <>
       <Components.SignInContainer signin={props.signin}>
         <Components.Form onSubmit={handleSubmit}>
-          <Components.Title>Sign in</Components.Title>
+          <Components.Title sx={{m:1}}>Sign in</Components.Title>
           <InputFormControl
             errorText='enter valid mail address'
             inputHandler={inputHandler}
@@ -127,7 +127,7 @@ import { signinUser } from '../../features/user/userSlice';
             {errors.password && <Typography sx={{ lineHeight: 1, textAlign: 'left', fontSize: '12px', color: 'red' }}>enter valid password</Typography>}
 
           </FormControl>
-          <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
+          {/* <Components.Anchor href='#'>Forgot your password?</Components.Anchor> */}
           <Components.Button type='submit'  >Sign In</Components.Button>
        
         </Components.Form>

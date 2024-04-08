@@ -1,6 +1,7 @@
 import { styled, Theme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { AppBar, Typography } from '@mui/material';
 export const Container = styled(Box)({
   backgroundColor: '#fff',
   borderRadius: '10px',
@@ -90,11 +91,12 @@ export const Button = styled('button')({
   },
 });
 
-export const GhostButton = styled(Button)({
+export const GhostButton = styled(Button)(({ signin }: { signin: boolean }) => ({
   backgroundColor: 'transparent',
   borderColor: '#ffffff',
-  cursor:'pointer'
-});
+  cursor:'pointer',
+  transform: signin?'translateX(40%)':'translateX(40%)'
+}));
 
 export const Anchor = styled('a')({
   color: '#333',
@@ -164,3 +166,24 @@ export const Paragraph = styled('p')({
   letterSpacing: '0.5px',
   margin: '20px 0 30px',
 });
+
+
+
+export const AppBarStyled = styled(AppBar)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  // backgroundColor: '#00000063',
+  backgroundColor: 'white',
+  border: '4px solid black',
+  borderTop: 0,
+  borderLeft: 0,
+  borderRight: 0,
+  position: "relative",
+}));
+
+
+
+export const HeaderTitle = styled(Typography)(({ theme }) => ({
+  flexGrow: 1,
+  color: 'black',
+  fontWeight: 600,
+}));

@@ -4,14 +4,15 @@ import React from 'react'
 import { useAppSelector } from "../../features/app/hooks"
 
 const RequireAuth = () => {
+    const appendUrl=process.env['REACT_APP_URL']
     
-    const {uid ,loading}= useAppSelector(state=>state.user.loggedStatus)
+    const {uid }= useAppSelector(state=>state.user.loggedStatus)
     
     const location = useLocation()
 
     return (
         ( uid!==null) ?<Outlet/>:
-       <Navigate to='/login' state={{from:location}} replace/>
+       <Navigate to={appendUrl+'/login'} state={{from:location}} replace/>
         
     )
 }

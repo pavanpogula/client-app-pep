@@ -2,6 +2,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { UserInitialState, User, signup, userExist } from '../types/userTypes'
 import axios from 'axios'
+
+
 const BASE_URL = process.env.REACT_APP_BASE_URL
 const config = {
  
@@ -53,13 +55,9 @@ export const signupUser = createAsyncThunk('user/signup', async ({email,password
     .then(response => response.data)
 })
 
-export const checkUserExists = createAsyncThunk('user/checkUser', async ({email}:{email:string}) => {
+export const checkUserExists = createAsyncThunk('user/checkUser/', async ({email}:{email:string}) => {
   return axios
-    .get(BASE_URL+'/checkUser',{
-      params:{
-        email
-      }
-    })
+    .get(BASE_URL+'/checkUser/'+email)
     .then(response => response.data)
 })
 
@@ -69,12 +67,24 @@ export const getAuth = createAsyncThunk('user/auth', async () => {
     .then(response => response.data['id'])
 })
 
+export const logoutUser = createAsyncThunk('user/logout', async () => {
+  return axios
+    .post(BASE_URL+'/logout',{},config)
+    .then(response => response.data)
+})
 
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+   setSignupStatus : (state)=>{
+    state.signup.message =''
+   },
+   setLoggedStatus: (state)=>{
+    state.loggedStatus.uid='xe40x'
+   }
+  },
   extraReducers: builder => {
     builder.addCase(signinUser.pending, state => {
       state.loading = true
@@ -144,7 +154,23 @@ const userSlice = createSlice({
       state.loggedStatus={uid:null,loading:false}
       state.error = action.error.message || 'Something went wrong'
     }})
+    builder.addCase(logoutUser.pending, state => {
+     state.loading=true
+    })
+    builder.addCase(
+      logoutUser.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.loading=false
+        state=initialState
+      }
+    )
+    builder.addCase(logoutUser.rejected, (state, action) => {{
+     
+      state=initialState
+      state.error = action.error.message || 'Something went wrong'
+    }})
   }
 })
 
+export const {setLoggedStatus,setSignupStatus } = userSlice.actions;
 export default userSlice.reducer
