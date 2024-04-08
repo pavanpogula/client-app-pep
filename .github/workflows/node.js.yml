@@ -32,18 +32,14 @@ jobs:
     - run: npm run build
 
     - name: Build React App with Docker image
-      if: github.ref == 'refs/heads/main'
-      run: docker build --build-arg REACT_APP_BASE_URL='${{secrets.REACT_APP_BASE_URL}}' --build-arg REACT_APP_SECRET='${{secrets.REACT_APP_SECRET}}' --build-arg REACT_APP_URL='${{secrets.REACT_APP_URL}}'  -t '${{secrets.DOCKER_USERNAME}}'/server-client-pep:latest . 
+      run: docker build --build-arg REACT_APP_BASE_URL='${{secrets.REACT_APP_BASE_URL}}' --build-arg REACT_APP_SECRET='${{secrets.REACT_APP_SECRET}}' --build-arg REACT_APP_URL='${{secrets.REACT_APP_URL}}'  -t '${{secrets.DOCKER_USERNAME}}'/server-app-pep:latest . 
       
     - name: Login to docker
-      if: github.ref == 'refs/heads/main'
       run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
 
     - name: Push the docker image
-      if: github.ref == 'refs/heads/main'
-      run: docker push '${{secrets.DOCKER_USERNAME}}'/server-client-pep:latest
+      run: docker push '${{secrets.DOCKER_USERNAME}}'/server-app-pep:latest
     - name: Deploy with gh-pages
-      if: github.ref == 'refs/heads/main'
       run: |
         git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
         npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
