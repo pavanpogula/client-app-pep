@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/client-app-pep/static/css/main.f855e6bc.css",
-    "main.js": "/client-app-pep/static/js/main.077cb05d.js",
+    "main.js": "/client-app-pep/static/js/main.371471ef.js",
     "static/js/453.59e6adbc.chunk.js": "/client-app-pep/static/js/453.59e6adbc.chunk.js",
     "static/media/quintrace.jpg": "/client-app-pep/static/media/quintrace.ad1ca34401dccd5efd6e.jpg",
     "static/media/illustration_404.svg": "/client-app-pep/static/media/illustration_404.62e062ffb1aa9a40611965004c50973a.svg",
     "static/media/tidal_icon.svg": "/client-app-pep/static/media/tidal_icon.ad926ec6de150ae8f49c55dedb17ed8f.svg",
-    "static/media/solar_icon.svg": "/client-app-pep/static/media/solar_icon.8c28cd88c789654ee1e75873c1b62d94.svg",
     "index.html": "/client-app-pep/index.html",
+    "static/media/solar_icon.svg": "/client-app-pep/static/media/solar_icon.8c28cd88c789654ee1e75873c1b62d94.svg",
     "static/media/turbine_icon.svg": "/client-app-pep/static/media/turbine_icon.61bcc78217fb446c538638ccdbf16c98.svg",
     "static/media/dashboard.svg": "/client-app-pep/static/media/dashboard.716f860a6cab195fa8bf9f43e7651810.svg",
     "static/media/profile_icon.svg": "/client-app-pep/static/media/profile_icon.99e963044c35da229bf8ffac1e3f7ddb.svg",
     "static/media/about_icon.svg": "/client-app-pep/static/media/about_icon.056b0245c83bea93ff0d4eaa88edbf24.svg",
     "main.f855e6bc.css.map": "/client-app-pep/static/css/main.f855e6bc.css.map",
-    "main.077cb05d.js.map": "/client-app-pep/static/js/main.077cb05d.js.map",
+    "main.371471ef.js.map": "/client-app-pep/static/js/main.371471ef.js.map",
     "453.59e6adbc.chunk.js.map": "/client-app-pep/static/js/453.59e6adbc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.077cb05d.js"
+    "static/js/main.371471ef.js"
   ]
 }
