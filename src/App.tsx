@@ -16,9 +16,10 @@ import MainDashboard from './components/mainDashboard/Pure';
 import NotFoundView from './components/pageNotFound/NotFoundPage';
 import About from './components/about/About';
 import Profile from './components/profile/Profile';
+import { APP_URL } from './utils/constants';
 
 function App() {
-  const appendUrl = process.env['REACT_APP_URL']
+  const appendUrl = process.env['REACT_APP_URL']?process.env['REACT_APP_URL']:APP_URL
   const dispatch = useAppDispatch();
   const { uid,  } = useAppSelector(state => state.user.loggedStatus)
  

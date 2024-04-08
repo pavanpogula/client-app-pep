@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import {useMemo } from 'react';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import Skeleton from '@mui/material/Skeleton';
@@ -14,14 +14,11 @@ const PieChart = ({isLoading,title,data}) => {
     
     const chartOptions = useMemo(() => {
         
-        const date = new Date();
+  
 const newData = data
-console.log(" data ",newData)
-        // Options for formatting the date
-        const options = { month: 'long', day: 'numeric' };
-        
-        // Format the date as "April 8"
-        const formattedDate = date.toLocaleDateString('en-US', options);
+
+    
+     
         return {
             chart: {
                 type: 'pie',

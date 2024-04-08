@@ -2,9 +2,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { UserInitialState, User, signup, userExist } from '../types/userTypes'
 import axios from 'axios'
+import { BASE_URL as URL } from '../../utils/constants'
 
 
-const BASE_URL = process.env['REACT_APP_BASE_URL']
+const BASE_URL = process.env['REACT_APP_BASE_URL']?process.env['REACT_APP_BASE_URL']:URL
 const config = {
  
   withCredentials:true

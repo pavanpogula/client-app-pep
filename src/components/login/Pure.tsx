@@ -7,7 +7,6 @@ import { Box, Skeleton, Stack } from "@mui/material";
 import {  useAppSelector } from "../../features/app/hooks";
 import { Container, GhostButton, LeftOverlayPanel, Overlay, OverlayContainer, RightOverlayPanel } from "./styles";
 import LandingHeader from "./header";
-import BgImage from '../icons/bgImageWebiste.jpeg'
 function Pure() {
     const [signin, setSignIn] = useState<boolean>(true);
 

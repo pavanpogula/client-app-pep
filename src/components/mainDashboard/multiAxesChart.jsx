@@ -14,7 +14,7 @@ const MultiAxesChart = () => {
   const [carbonProduced,setCarbon] = React.useState([])
     const [energyConsumed,setConsumed] = React.useState([])
     const [energyProduced,setProduced] = React.useState([])
-  const { data, loading, error } = useAppSelector(state => state.dashboard.barData);
+  const { data, loading } = useAppSelector(state => state.dashboard.barData);
     
 
   React.useEffect(()=>{

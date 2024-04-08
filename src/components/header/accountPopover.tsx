@@ -11,8 +11,9 @@ import IconButton from '@mui/material/IconButton';
 
 import { useAppDispatch, useAppSelector } from '../../features/app/hooks';
 import { logoutUser } from '../../features/user/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import avtarIcon from "../icons/avatar.jpg"
+import { APP_URL } from '../../utils/constants';
 
 const MENU_OPTIONS = [
   {
@@ -31,7 +32,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const appendUrl = process.env['REACT_APP_URL']
+  const appendUrl = process.env['REACT_APP_URL']?process.env['REACT_APP_URL']:APP_URL
   const [open, setOpen] = useState<HTMLElement | null>(null);
   const {firstname, lastname, email } = useAppSelector(state=>state.user.user)
   const dispatch = useAppDispatch()

@@ -2,9 +2,10 @@ import { useLocation, Navigate, Outlet } from "react-router-dom"
 
 import React from 'react'
 import { useAppSelector } from "../../features/app/hooks"
+import { APP_URL } from "../../utils/constants"
 
 const RequireAuth = () => {
-    const appendUrl=process.env['REACT_APP_URL']
+    const appendUrl=process.env['REACT_APP_URL']?process.env['REACT_APP_URL']:APP_URL
     
     const {uid }= useAppSelector(state=>state.user.loggedStatus)
     
