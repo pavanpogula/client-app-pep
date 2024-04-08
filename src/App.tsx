@@ -25,9 +25,9 @@ function App() {
   const naviagte = useNavigate();
   useEffect(() => {
     if (uid !== 'xe40x' && uid !== null) {
-      naviagte('/dashboard')
+      naviagte(appendUrl+'/dashboard')
     }else{
-      naviagte('/login')
+      naviagte(appendUrl+'/login')
     }
   }, [uid])
   useEffect(() => {

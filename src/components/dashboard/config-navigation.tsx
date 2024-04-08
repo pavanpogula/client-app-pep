@@ -7,7 +7,7 @@ import { SvgIcon } from '@mui/material';
 import DashboardIcon from "../icons/dashboard.svg"
 import ProfileIcon from "../icons/profile_icon.svg"
 import AboutIcon from "../icons/about_icon.svg"
-
+const appendUrl = process.env['REACT_APP_URL']
 type NavItem = {
   title: string;
   path: string;
@@ -17,21 +17,21 @@ type NavItem = {
 const navConfig: NavItem[] = [
   {
     title: 'dashboard',
-    path: '/dashboard',
+    path: `${appendUrl}/dashboard`,
     icon: <Box>
      <img src={DashboardIcon}/>
   </Box>
   },
   {
     title: 'user',
-    path: '/user',
+    path: `${appendUrl}/user`,
     icon: <Box>
     <img src={ProfileIcon}/>
   </Box>
   },
   {
     title: 'about',
-    path: '/about',
+    path: `${appendUrl}/about`,
     icon:<Box>
     <img src={AboutIcon}/>
   </Box>
