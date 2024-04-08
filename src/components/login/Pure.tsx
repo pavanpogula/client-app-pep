@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import * as Components from './styles';
+import  { useState } from "react";
+
 import { SignupForm } from "./signupForm";
 import  SigninForm  from "./signinForm";
 import TypingText from "./TypingText";
-import { Box } from "@mui/material";
+import { Box, Skeleton, Stack } from "@mui/material";
 import {  useAppSelector } from "../../features/app/hooks";
-
+import { Container, GhostButton, LeftOverlayPanel, Overlay, OverlayContainer, RightOverlayPanel } from "./styles";
+import LandingHeader from "./header";
+import BgImage from '../icons/bgImageWebiste.jpeg'
 function Pure() {
     const [signin, setSignIn] = useState<boolean>(true);
 
@@ -18,38 +20,52 @@ function Pure() {
 
     return (
         !loading?
-        <Components.Container>
+        <>
+     
+        <LandingHeader />
+        <Container>
               <SigninForm signin={signin}/>
 <SignupForm signin={signin}/>
          
 
-            <Components.OverlayContainer signin={signin}>
-                <Components.Overlay signin={signin}>
-                    <Components.LeftOverlayPanel >
+            <OverlayContainer signin={signin}>
+                <Overlay signin={signin}>
+                    <LeftOverlayPanel >
                       { !signin &&<><TypingText signin={!signin}/>
                     
                         <Box sx={{mt:10}}>
-                        <Components.GhostButton onClick={() => handleToggle(true)}>
+                        <GhostButton signin={!signin} onClick={() => handleToggle(true)}>
                             Sign In
-                        </Components.GhostButton>
+                        </GhostButton>
                         </Box>
                         </>
                         }
-                    </Components.LeftOverlayPanel>
+                    </LeftOverlayPanel>
 
-                    <Components.RightOverlayPanel >
+                    <RightOverlayPanel >
                 {  signin&&<><TypingText signin={!signin}/>
                      
-                        <Box sx={{mt:10}}>
-                        <Components.GhostButton onClick={() => handleToggle(false)}>
+                        <Box sx={{mt:15}}>
+                        <GhostButton signin={!signin} onClick={() => handleToggle(false)}>
                             Sign Up
-                        </Components.GhostButton>
+                        </GhostButton>
                         </Box></>}
-                    </Components.RightOverlayPanel>
-                </Components.Overlay>
-            </Components.OverlayContainer>
-        </Components.Container>
-        :<></>
+                    </RightOverlayPanel>
+                </Overlay>
+            </OverlayContainer>
+        </Container>
+
+        </>
+        :
+        (<Stack direction={'column'} display={'flex'}flexWrap={'wrap'} spacing={4}>
+        <Box> <Skeleton animation="wave" height={150} style={{ width:'99%',marginTop:0,marginLeft: 'auto', marginRight: 'auto' }} ></Skeleton></Box>
+        <Stack display={'flex'} flexDirection={'row'} spacing={3} flexWrap={'wrap'}>
+      
+        <Skeleton animation="wave" height={1000} style={{ width:'10%',marginTop:0,marginLeft:'20px',bottom:'250px' }} ></Skeleton>
+       
+        <Skeleton animation="wave" height={1000} style={{ width:'80%',marginTop:0,marginLeft:'40px',bottom:'250px' }} ></Skeleton>
+        </Stack>
+        </Stack>)
     );
 }
 

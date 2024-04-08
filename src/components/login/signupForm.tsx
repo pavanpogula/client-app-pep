@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MailIcon from '@mui/icons-material/Mail';
 import { Box, FormControl, IconButton, Input, InputAdornment, InputLabel, Typography } from '@mui/material';
 
@@ -8,8 +8,10 @@ import { encrpt_password, validate_email, validate_name, validate_password } fro
 import * as Components from './styles';
 import InputFormControl from './inputFormControl';
 import { useAppDispatch, useAppSelector } from '../../features/app/hooks';
-import { checkUserExists,  signupUser } from '../../features/user/userSlice';
-import { userExist } from '../../features/types/userTypes';
+import { checkUserExists,  setSignupStatus,  signupUser } from '../../features/user/userSlice';
+import { signup, userExist } from '../../features/types/userTypes';
+
+
 
 interface ErrorsState {
   email: boolean;
@@ -24,6 +26,10 @@ export const SignupForm = (props: { signin: boolean }) => {
 
   const dispatch = useAppDispatch();
   const userExistDB:userExist = useAppSelector(state=>state.user.userExist)
+  const signupCode:signup = useAppSelector(state=>state.user.signup)
+
+
+
   //email state
   const [email, setEmail] = React.useState<string>('');
   const [confirmEmail, setConfirmEmail] = React.useState<string>('');
@@ -47,7 +53,17 @@ export const SignupForm = (props: { signin: boolean }) => {
   })
 
 
- 
+  useEffect(()=>{
+    if(signupCode.message==='409'){
+      alert("Email already has an account ")
+    }else if(signupCode.message==='201'){
+      alert("Registered Succesfully")
+      dispatch(setSignupStatus())
+      window.location.reload()
+    }else if(signupCode.message==='500'){
+      alert("Server Error , Please Try Again")
+    }
+  },[signupCode.message])
 
 
 
@@ -85,9 +101,9 @@ export const SignupForm = (props: { signin: boolean }) => {
     event.preventDefault();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
- dispatch(checkUserExists({email}))
+  await dispatch(checkUserExists({email}))
     const err:ErrorsState ={...errors}
 
     if(!validate_name(firstname))
@@ -95,7 +111,10 @@ export const SignupForm = (props: { signin: boolean }) => {
     if(!validate_name(lastname))
       err.lastname=true
     if(!validate_email(email))
-      err.email=true
+      {err.email=true 
+       if( userExistDB['message']==='409')
+        err.email=true
+      }
     if( !validate_email(confirmEmail)  || email!==confirmEmail )
       err.confirmEmail=true
     if(!validate_password(password))
@@ -108,9 +127,9 @@ export const SignupForm = (props: { signin: boolean }) => {
       };
 
 
-      if(hasErrors(err) ){
+      if(hasErrors(err) || userExistDB['message']==='409'){
         setErrors({...err})
-        alert('cannot login')
+        alert(`Cannot SignUp ${userExistDB['message']==='409'&& 'Email Already Exists'}`)
       }else{
        const hashedPassword = encrpt_password(password)
           dispatch(signupUser({"password":hashedPassword,email,firstname,lastname}))
@@ -128,7 +147,7 @@ export const SignupForm = (props: { signin: boolean }) => {
     <>
       <Components.SignUpContainer signin={props.signin}>
         <Components.Form onSubmit={handleSubmit}>
-          <Components.Title>Create Account</Components.Title>
+          <Components.Title>Start Your Journey!</Components.Title>
           <Box>
 
 
@@ -197,7 +216,7 @@ export const SignupForm = (props: { signin: boolean }) => {
               <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
               <Input
               key={1}
-             autoComplete='current-password'
+
                 name='password'
                 id="standard-adornment-password"
                 value={password}
@@ -223,7 +242,7 @@ export const SignupForm = (props: { signin: boolean }) => {
               <InputLabel htmlFor="standard-adornment-confirm-password">Confirm Password</InputLabel>
               <Input
               key={2}
-            autoComplete='current-password'
+        
                 name='confirmPassword'
                 id="standard-adornment-confirm-password"
                 value={confirmPassword}
@@ -246,7 +265,7 @@ export const SignupForm = (props: { signin: boolean }) => {
 
             </FormControl>
           </Box>
-          <Components.Button>Sign Up</Components.Button>
+          <Components.Button sx={{mt:2}}>Sign Up</Components.Button>
         </Components.Form>
       </Components.SignUpContainer>
     </>
