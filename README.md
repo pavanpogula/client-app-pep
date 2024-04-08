@@ -1,5 +1,10 @@
-# Getting Started with Create React App
+# To Run the app from docker , do git clone
 
+### `cd client-app-pep`
+
+### `docker-compose up` -> this will pull the image from docker hub and will run it 
+
+### `docker-compose down` -> this will stop the container 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
