@@ -7,12 +7,13 @@ import Typography from '@mui/material/Typography';
 
 import ImageData from '../icons/illustration_404.svg';
 import { RouterLink } from '../routes';
+import { APP_URL } from '../../utils/constants';
 
 // ----------------------------------------------------------------------
 
 export default function NotFoundView() {
  
-const appendUrl = process.env['REACT_APP_URL']
+const appendUrl =   process.env['REACT_APP_URL']?  process.env['REACT_APP_URL']:APP_URL
   return (
     <>
  

@@ -3,7 +3,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
 import axios from 'axios'
 import { DashboardStateType,  } from '../types/dashboardTypes'
-const BASE_URL = process.env['REACT_APP_BASE_URL']
+import { BASE_URL as URL} from '../../utils/constants'
+const BASE_URL = process.env['REACT_APP_BASE_URL']?process.env['REACT_APP_BASE_URL']:URL
 
 
 //initial state of the user

@@ -1,8 +1,6 @@
 
 import { Box, Toolbar} from '@mui/material';
-import Tooltip from '@mui/material/Tooltip';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
+
 
 import { AppBarStyled, HeaderTitle } from './styles';
 

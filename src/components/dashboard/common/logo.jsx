@@ -23,7 +23,7 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
       }}
       {...other}
     >
-       <img style={{objectFit:'contain'}} src={imageData}></img>
+       <img alt='' style={{objectFit:'contain'}} src={imageData}></img>
     </Box>
   );
 

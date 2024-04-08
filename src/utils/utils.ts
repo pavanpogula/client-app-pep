@@ -34,9 +34,9 @@ const validate_name = (data:string):boolean =>{
 
 const encrpt_password = (message:string) => {
     var key = CryptoJS.enc.Utf8.parse(SECRET);
-    console.log(key)
-    let encrypted= CryptoJS.AES.encrypt(message, key, { mode: CryptoJS.mode.ECB }).toString();
-      console.log("mode ",encrypted)
+
+    const encrypted= CryptoJS.AES.encrypt(message, key, { mode: CryptoJS.mode.ECB }).toString();
+
 
    return encrypted;
 }

@@ -15,7 +15,7 @@ const PieChartSection = () => {
     const [consumed,setConsumed] = React.useState([])
     const [produced,setProduced] = React.useState([])
     const dispatch = useAppDispatch()
-    const { data, loading, error } = useAppSelector(state => state.dashboard.pieData);
+    const { data } = useAppSelector(state => state.dashboard.pieData);
     
     useEffect(()=>{
             dispatch(fetchdashboardPieDataArray({state:state,year:date}))
