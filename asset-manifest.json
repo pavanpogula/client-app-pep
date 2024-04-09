@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/client-app-pep/static/css/main.f855e6bc.css",
-    "main.js": "/client-app-pep/static/js/main.e9733c98.js",
+    "main.js": "/client-app-pep/static/js/main.ff152ac1.js",
     "static/js/453.59e6adbc.chunk.js": "/client-app-pep/static/js/453.59e6adbc.chunk.js",
     "static/media/quintrace.jpg": "/client-app-pep/static/media/quintrace.ad1ca34401dccd5efd6e.jpg",
     "static/media/illustration_404.svg": "/client-app-pep/static/media/illustration_404.62e062ffb1aa9a40611965004c50973a.svg",
@@ -13,11 +13,11 @@
     "static/media/profile_icon.svg": "/client-app-pep/static/media/profile_icon.99e963044c35da229bf8ffac1e3f7ddb.svg",
     "static/media/about_icon.svg": "/client-app-pep/static/media/about_icon.056b0245c83bea93ff0d4eaa88edbf24.svg",
     "main.f855e6bc.css.map": "/client-app-pep/static/css/main.f855e6bc.css.map",
-    "main.e9733c98.js.map": "/client-app-pep/static/js/main.e9733c98.js.map",
+    "main.ff152ac1.js.map": "/client-app-pep/static/js/main.ff152ac1.js.map",
     "453.59e6adbc.chunk.js.map": "/client-app-pep/static/js/453.59e6adbc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.e9733c98.js"
+    "static/js/main.ff152ac1.js"
   ]
 }
