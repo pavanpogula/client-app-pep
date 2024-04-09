@@ -22,7 +22,13 @@ const initialState: DashboardStateType = {
   }
 
 }
-
+const config = {
+  headers: {
+    'Content-Type': 'application/json', // Set the Content-Type header if needed
+    // Add other headers if needed
+  },
+  withCredentials:true
+}
 
 
 
@@ -30,14 +36,14 @@ const initialState: DashboardStateType = {
 
 export const fetchdashboardPieDataArray = createAsyncThunk('charts/pieArray', async ({year,state}:{year:number,state:string}) => {
   return axios
-    .get(BASE_URL+`/dashboard/pieData/${state}/${year}`, { withCredentials: true })
+    .get(BASE_URL+`/dashboard/pieData/${state}/${year}`, config)
     .then(response => response.data)
 })
 
 export const fetchdashboardMultiAxisData = createAsyncThunk('charts/multiAxes', async ({year}:{year:number}) => {
  
   return axios
-  .get(BASE_URL+`/dashboard/multiAxesData/${year}`, { withCredentials: true })
+  .get(BASE_URL+`/dashboard/multiAxesData/${year}`, config)
     .then(response => response.data)
 })
 
