@@ -7,7 +7,10 @@ import { BASE_URL as URL } from '../../utils/constants'
 
 const BASE_URL = process.env['REACT_APP_BASE_URL']?process.env['REACT_APP_BASE_URL']:URL
 const config = {
- 
+  headers: {
+    'Content-Type': 'application/json', // Set the Content-Type header if needed
+    // Add other headers if needed
+  },
   withCredentials:true
 }
 
@@ -58,7 +61,7 @@ export const signupUser = createAsyncThunk('user/signup', async ({email,password
 
 export const checkUserExists = createAsyncThunk('user/checkUser/', async ({email}:{email:string}) => {
   return axios
-    .get(BASE_URL+'/checkUser/'+email)
+    .get(BASE_URL+'/checkUser/'+email,config)
     .then(response => response.data)
 })
 
