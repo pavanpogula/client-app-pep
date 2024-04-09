@@ -2,7 +2,7 @@
   "name": "client-app-pep",
   "version": "0.1.0",
   "private": true,
-  "homepage": "hppts://pavanpogula.github.io/client-app-pep",
+  "homepage": "https://pavanpogula.github.io/client-app-pep",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -62,5 +62,5 @@
   "devDependencies": {
     "gh-pages": "^6.1.1"
   },
-  "proxy": "http://18.218.49.100:8000"
+  "proxy": "https://df184qz7f6.execute-api.us-east-2.amazonaws.com"
 }
