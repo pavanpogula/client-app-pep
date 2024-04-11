@@ -35,6 +35,7 @@ const newData = data
                 }
             },
             tooltip: {
+                headerFormat:'<b>{point.key}</b><br/>',
                 valueSuffix: '%',
                 color: 'black',
                 borderColor: '#ccc',
@@ -72,6 +73,7 @@ const newData = data
             },
             series: [{
                 name: title,
+                
                 colors: [
                     '#ff9933', // Saturated orange (base hue)
                     '#ffcc66', // Brighter orange (increased saturation)

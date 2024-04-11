@@ -74,7 +74,7 @@ import { signinUser } from '../../features/user/userSlice';
    dispatch(signinUser({ "email": email,
       "password": hashedPassword}))
     } else {
-      alert("cannot signin")
+      alert("Please check all the form details")
     }
   }
 

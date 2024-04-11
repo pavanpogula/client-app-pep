@@ -1,5 +1,5 @@
 
-import  {  useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from './features/app/hooks';
@@ -19,21 +19,24 @@ import Profile from './components/profile/Profile';
 import { APP_URL } from './utils/constants';
 
 function App() {
-  const appendUrl = process.env['REACT_APP_URL']?process.env['REACT_APP_URL']:APP_URL
+  const appendUrl = process.env['REACT_APP_URL'] ? process.env['REACT_APP_URL'] : APP_URL
   const dispatch = useAppDispatch();
-  const { uid,  } = useAppSelector(state => state.user.loggedStatus)
- 
+  const { uid, } = useAppSelector(state => state.user.loggedStatus)
+
   const naviagte = useNavigate();
   useEffect(() => {
     if (uid !== 'xe40x' && uid !== null) {
-      naviagte(appendUrl+'/dashboard')
-    }else{
-      naviagte(appendUrl+'/login')
+      naviagte(appendUrl + '/dashboard')
+    } else {
+      naviagte(appendUrl + '/login')
     }
   }, [uid])
+
+
+  
   useEffect(() => {
 
-    if (uid === 'xe40x'){
+    if (uid === 'xe40x') {
       dispatch(getAuth())
     }
   }, [])
@@ -42,33 +45,33 @@ function App() {
   const location = useLocation()
 
   return (
- 
+
     <Routes>
-      
-      <Route path={appendUrl+'/'} element={<Outlet />}>
 
-      <Route path="*" element={<NotFoundView />}/>
+      <Route path={appendUrl + '/'} element={<Outlet />}>
 
-     
+        <Route path="*" element={<NotFoundView />} />
 
-        <Route index Component={() => ((uid !== 'xe40x' && uid !== null) ? <Navigate to={appendUrl+'/dashboard'} state={{ from: location }} replace /> : <Pure />)} />
+
+
+        <Route index Component={() => ((uid !== 'xe40x' && uid !== null) ? <Navigate to={appendUrl + '/dashboard'} state={{ from: location }} replace /> : <Pure />)} />
         {/* //protected route */}
-        <Route path={appendUrl+'/login'} Component={() => ((uid !== 'xe40x' && uid !== null) ? <Navigate to={appendUrl+'/dashboard'} state={{ from: location }} replace /> : <Pure />)} />
-     
+        <Route path={appendUrl + '/login'} Component={() => ((uid !== 'xe40x' && uid !== null) ? <Navigate to={appendUrl + '/dashboard'} state={{ from: location }} replace /> : <Pure />)} />
+
         <Route element={<RequireAuth />}>
-          <Route path={appendUrl+'/dashboard'} element={<DashboardLayout>
-<MainDashboard/>
+          <Route path={appendUrl + '/dashboard'} element={<DashboardLayout>
+            <MainDashboard />
 
-  </DashboardLayout>} />
-  <Route path={appendUrl+'/about'} element={<DashboardLayout>
-<About/>
+          </DashboardLayout>} />
+          <Route path={appendUrl + '/about'} element={<DashboardLayout>
+            <About />
 
-  </DashboardLayout>} />
+          </DashboardLayout>} />
 
-  <Route path={appendUrl+'/user'} element={<DashboardLayout>
-<Profile/>
+          <Route path={appendUrl + '/user'} element={<DashboardLayout>
+            <Profile />
 
-  </DashboardLayout>} />
+          </DashboardLayout>} />
         </Route>
       </Route>
 

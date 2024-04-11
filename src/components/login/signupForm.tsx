@@ -129,7 +129,7 @@ export const SignupForm = (props: { signin: boolean }) => {
 
       if(hasErrors(err) || userExistDB['message']==='409'){
         setErrors({...err})
-        alert(`Cannot SignUp ${userExistDB['message']==='409'&& 'Email Already Exists'}`)
+        alert(`Cannot SignUp ${userExistDB['message']==='409'? 'Email Already Exists':''}`)
       }else{
        const hashedPassword = encrpt_password(password)
           dispatch(signupUser({"password":hashedPassword,email,firstname,lastname}))

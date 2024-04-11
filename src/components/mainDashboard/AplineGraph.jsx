@@ -43,7 +43,8 @@ const MyChart = () => {
     },
     tooltip: {
       shared: true,
-      headerFormat: '<b>{point.series.name} at {point.x}:00 </b><br>' // Include AM/PM in tooltip
+      headerFormat: '<b>{point.series.name} at {point.x}:00 </b><br>', // Include AM/PM in tooltip
+      valueSuffix: ' (kwh)'
     },
     credits: {
       enabled: false

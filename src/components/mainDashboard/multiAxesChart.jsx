@@ -73,8 +73,9 @@ useEffect(()=>{
       valueSuffix: '%',
       formatter: function () {
         let tooltip = '<b>' + this.x + '</b><br/>';
-        this.points.forEach(point => {
-          tooltip += '<span style="color:' + point.series.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + '</b><br/>';
+        this.points.forEach((point,index) => {
+          let suffix = index===2 ?' (gCO2/kWh)' : ' (kWh)'
+          tooltip += '<span style="color:' + point.series.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + suffix  +'</b><br/>';
         });
         return tooltip;
       },
